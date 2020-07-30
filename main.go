@@ -1,11 +1,13 @@
 package main
 
 import (
+	"bufio"
 	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
 	"net"
+	"os"
 
 	"github.com/google/tcpproxy"
 	"github.com/kataras/golog"
@@ -22,7 +24,11 @@ type (
 func main() {
 	ip, err := externalIP()
 	if err != nil {
-		fmt.Println(err)
+		golog.Error(err)
+
+		fmt.Print("Press any keys to exit...")
+		bufio.NewReader(os.Stdin).ReadBytes('\n')
+		return
 	}
 
 	routingTable := readJSONFile()
