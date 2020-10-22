@@ -1,4 +1,4 @@
-module socat_alter
+module github.com/captain-corgi/socat_alter
 
 go 1.13
 
